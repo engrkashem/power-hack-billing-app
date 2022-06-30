@@ -95,9 +95,9 @@ const Register = ({ setAuth }) => {
                                     className="label-text-alt text-rose-500">{errors.password.message}
                                 </span>}
                             </label>
-                        </div><input className='btn btn-outline btn-primary w-1/2 mx-auto block' type="submit" value='SIGN UP' />
+                        </div><input className='btn btn-outline btn-accent w-1/2 mx-auto block' type="submit" value='SIGN UP' />
                     </form>
-                    <p className=' font-semibold mt-5'>Already User to Power Hack? <span onClick={() => setAuth('login')} className='text-primary text-xl cursor-pointer'> Please Login</span></p>
+                    <p className=' font-semibold mt-5'>Already User to Power Hack? <span onClick={() => setAuth('login')} className='text-accent text-xl cursor-pointer'> Please Login</span></p>
                 </div>
             </div>
         </div>

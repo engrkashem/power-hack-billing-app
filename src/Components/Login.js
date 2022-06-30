@@ -75,9 +75,9 @@ const Login = ({ setAuth }) => {
                                 </span>}
                             </label>
                         </div>
-                        <input className='btn btn-outline btn-primary w-1/2 mx-auto block' type="submit" value='LOGIN' />
+                        <input className='btn btn-outline btn-accent w-1/2 mx-auto block' type="submit" value='LOGIN' />
                     </form>
-                    <p className=' font-semibold mt-5'>New to Power Hack? <span onClick={() => setAuth('register')} className=' text-primary text-xl cursor-pointer'>Register</span></p>
+                    <p className=' font-semibold mt-5'>New to Power Hack? <span onClick={() => setAuth('register')} className=' text-accent text-xl cursor-pointer'>Register</span></p>
                 </div>
             </div>
         </div>
