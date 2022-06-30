@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 
 const NavBar = () => {
     return (
-        <div class="navbar bg-accent">
-            <div class="navbar-start">
-                <Link to={'/'} class="btn btn-ghost normal-case text-xl">Power Hack</Link>
+        <div className="navbar bg-accent">
+            <div className="navbar-start">
+                <Link to={'/'} className="btn btn-ghost normal-case text-xl">Power Hack</Link>
             </div>
-            <div class="navbar-end">
+            <div className="navbar-end">
                 <Link className='btn btn-accent text-xl normal-case' to={'/billing'}>Billing</Link>
                 <p className=' text-xl font-bold mr-5'>Paid Total:
                     <span>00</span>

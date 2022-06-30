@@ -1,13 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import useSecretToken from '../hooks/useSecretToken';
+import { useNavigate } from 'react-router-dom';
 
 const Register = ({ setAuth }) => {
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
 
-    const onSubmit = async data => {
-        console.log(data);
+    const [user, setUser] = useState({});
 
+    const [token] = useSecretToken(user);
+
+    const navigate = useNavigate()
+
+    if (token) {
+        navigate('/billing');
+    }
+
+    const onSubmit = async data => {
+        setUser(data);
+        // console.log(data);
     };
+
     return (
         <div className=' flex h-screen justify-center items-center  bg-cover'>
             <div className="card w-96 lg:w-1/2 bg-base-100 shadow-xl glass">
@@ -95,7 +108,8 @@ const Register = ({ setAuth }) => {
                                     className="label-text-alt text-rose-500">{errors.password.message}
                                 </span>}
                             </label>
-                        </div><input className='btn btn-outline btn-accent w-1/2 mx-auto block' type="submit" value='SIGN UP' />
+                        </div>
+                        <input className='btn btn-outline btn-accent w-1/2 mx-auto block' type="submit" value='Register' />
                     </form>
                     <p className=' font-semibold mt-5'>Already User to Power Hack? <span onClick={() => setAuth('login')} className='text-accent text-xl cursor-pointer'> Please Login</span></p>
                 </div>

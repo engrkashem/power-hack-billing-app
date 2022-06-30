@@ -6,7 +6,7 @@ const Home = () => {
     const [auth, setAuth] = useState('login');
     return (
         <div>
-            <h2>Welcome come to <span>Power Hack</span></h2>
+            <h2 className=' text-center text-2xl font-bold mt-12'>Welcome come to <span className=' text-4xl'>Power Hack</span> Billing Portal</h2>
             {
                 auth === 'login' ?
                     <Login

@@ -1,11 +1,33 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Login = ({ setAuth }) => {
     const { register, formState: { errors }, handleSubmit, getValues, reset } = useForm();
 
-    const onSubmit = data => {
-        console.log(data);
+    const navigate = useNavigate();
+
+    const onSubmit = user => {
+        const email = user.email;
+        const url = `http://localhost:5000/user/${email}`;
+        if (email) {
+            fetch(url)
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data.result);
+                    if (data.result) {
+                        const secretToken = data.secretToken;
+                        localStorage.setItem('secretToken', secretToken);
+                        navigate('/billing');
+                    }
+                    else {
+                        setAuth('register');
+                        toast.error('You are not currently a user. Please Register first.');
+                    }
+
+                })
+        }
 
     };
 
