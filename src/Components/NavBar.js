@@ -1,7 +1,11 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 
-const NavBar = ({ isUser }) => {
+const NavBar = () => {
+
+    const isUser = sessionStorage.getItem('isUser');
+
+
     return (
         <div className="navbar bg-accent">
             <div className="navbar-start">

@@ -21,6 +21,7 @@ const useSecretToken = user => {
                     const secretToken = data.secretToken;
                     localStorage.setItem('secretToken', secretToken);
                     setSecretToken(secretToken);
+                    sessionStorage.setItem('isUser', true);
                     // console.log(data);
                 })
         }

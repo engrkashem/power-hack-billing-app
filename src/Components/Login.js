@@ -3,8 +3,8 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-const Login = ({ setAuth, setIsUser }) => {
-    const { register, formState: { errors }, handleSubmit, getValues, reset } = useForm();
+const Login = ({ setAuth }) => {
+    const { register, formState: { errors }, handleSubmit } = useForm();
 
     const navigate = useNavigate();
 
@@ -21,8 +21,8 @@ const Login = ({ setAuth, setIsUser }) => {
                         if (data.result.password === password) {
                             const secretToken = data.secretToken;
                             localStorage.setItem('secretToken', secretToken);
-                            setIsUser(true);
                             navigate('/billing');
+                            sessionStorage.setItem('isUser', true);
                         }
                         else {
                             setAuth('register');

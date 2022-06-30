@@ -3,8 +3,8 @@ import { useForm } from 'react-hook-form';
 import useSecretToken from '../hooks/useSecretToken';
 import { useNavigate } from 'react-router-dom';
 
-const Register = ({ setAuth, setIsUser }) => {
-    const { register, formState: { errors }, handleSubmit, reset } = useForm();
+const Register = ({ setAuth }) => {
+    const { register, formState: { errors }, handleSubmit } = useForm();
 
     const [user, setUser] = useState({});
 
@@ -13,7 +13,6 @@ const Register = ({ setAuth, setIsUser }) => {
     const navigate = useNavigate()
 
     if (token) {
-        setIsUser(true);
         navigate('/billing');
     }
 

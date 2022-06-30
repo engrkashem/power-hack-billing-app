@@ -12,11 +12,9 @@ const Home = ({ setIsUser }) => {
                 auth === 'login' ?
                     <Login
                         setAuth={setAuth}
-                        setIsUser={setIsUser}
                     ></Login> :
                     <Register
                         setAuth={setAuth}
-                        setIsUser={setIsUser}
                     ></Register>
             }
         </div>
