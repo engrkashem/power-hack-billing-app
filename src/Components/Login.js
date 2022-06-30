@@ -1,6 +1,5 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from "react-router-dom";
 
 const Login = ({ setAuth }) => {
     const { register, formState: { errors }, handleSubmit, getValues, reset } = useForm();
@@ -78,7 +77,7 @@ const Login = ({ setAuth }) => {
                         </div>
                         <input className='btn btn-outline btn-primary w-1/2 mx-auto block' type="submit" value='LOGIN' />
                     </form>
-                    <p className=' font-semibold mt-5'>New to SKS Inc.? <Link to={'/register'} className=' text-primary text-xl'>Register</Link></p>
+                    <p className=' font-semibold mt-5'>New to Power Hack? <span onClick={() => setAuth('register')} className=' text-primary text-xl cursor-pointer'>Register</span></p>
                 </div>
             </div>
         </div>
