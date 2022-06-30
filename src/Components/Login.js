@@ -10,16 +10,23 @@ const Login = ({ setAuth }) => {
 
     const onSubmit = user => {
         const email = user.email;
+        const password = user.password;
         const url = `http://localhost:5000/user/${email}`;
         if (email) {
             fetch(url)
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data.result);
+                    // console.log(data);
                     if (data.result) {
-                        const secretToken = data.secretToken;
-                        localStorage.setItem('secretToken', secretToken);
-                        navigate('/billing');
+                        if (data.result.password === password) {
+                            const secretToken = data.secretToken;
+                            localStorage.setItem('secretToken', secretToken);
+                            navigate('/billing');
+                        }
+                        else {
+                            setAuth('register');
+                            toast.error('Your email and password does not match. Please Register again.');
+                        }
                     }
                     else {
                         setAuth('register');
