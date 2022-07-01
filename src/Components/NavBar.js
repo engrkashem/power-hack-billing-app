@@ -5,6 +5,10 @@ const NavBar = () => {
 
     const isUser = sessionStorage.getItem('isUser');
 
+    const handleLogout = () => {
+        sessionStorage.removeItem('isUser');
+        localStorage.removeItem('secretToken');
+    }
 
     return (
         <div className="navbar bg-accent">
@@ -13,7 +17,10 @@ const NavBar = () => {
             </div>
             <div className="navbar-end">
                 {
-                    isUser && <Link className='btn btn-accent text-xl normal-case' to={'/billing'}>Billing</Link>
+                    isUser && <>
+                        <Link className='btn btn-accent text-xl normal-case' to={'/billing'}>Billing</Link>
+                        <Link onClick={handleLogout} className='btn btn-accent text-xl normal-case' to={'/billing'}>Logout</Link>
+                    </>
                 }
                 <p className=' text-xl font-bold mr-5'>Paid Total:
                     <span>00</span>

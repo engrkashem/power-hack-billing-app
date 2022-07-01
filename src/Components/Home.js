@@ -1,9 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Login from './Login';
 import Register from './Register';
 
 const Home = ({ setIsUser }) => {
     const [auth, setAuth] = useState('login');
+    const isUser = sessionStorage.getItem('isUser');
+
+    const navigate = useNavigate();
+    let from = "/";
+
+    useEffect(() => {
+        if (isUser) {
+            navigate(from, { replace: true });
+        }
+    }, [isUser, navigate, from]);
 
     return (
         <div>
