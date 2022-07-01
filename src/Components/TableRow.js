@@ -3,8 +3,9 @@ import React from 'react';
 const TableRow = ({ bill, setDeleteUrl, setDeleteBill }) => {
 
     const handleDeleteBill = (_id) => {
-        const url = `http://localhost:5000/bill/${_id}`;
-        // const url = `https://agile-badlands-34653.herokuapp.com/order/${_id}`;
+        // const url = `http://localhost:5000/bill/${_id}`;
+        const url = `https://agile-castle-63096.herokuapp.com/bill/${_id}`;
+
         setDeleteUrl(url);
         setDeleteBill(bill);
     }

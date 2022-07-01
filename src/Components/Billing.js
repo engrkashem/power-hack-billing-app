@@ -10,7 +10,8 @@ const Billing = () => {
     const [deleteBill, setDeleteBill] = useState(null);
     const [deleteUrl, setDeleteUrl] = useState('');
     useEffect(() => {
-        const url = `http://localhost:5000/bill`;
+        // const url = `http://localhost:5000/bill`;
+        const url = `https://agile-castle-63096.herokuapp.com/bill`;
         fetch(url)
             .then(res => res.json())
             .then(data => setReceivedBills(data))
@@ -22,7 +23,6 @@ const Billing = () => {
     }
 
     const confirmDeleteBill = () => {
-        console.log(deleteUrl)
 
         fetch(deleteUrl, {
             method: 'DELETE',
