@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 
-const NavBar = () => {
+const NavBar = ({ total }) => {
 
     const isUser = sessionStorage.getItem('isUser');
 
@@ -23,7 +23,7 @@ const NavBar = () => {
                     </>
                 }
                 <p className=' text-xl font-bold mr-5'>Paid Total:
-                    <span>00</span>
+                    <span>{total}</span>
                 </p>
             </div>
         </div>

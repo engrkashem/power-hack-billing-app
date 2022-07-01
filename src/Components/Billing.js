@@ -4,18 +4,22 @@ import AddBillModal from './AddBillModal';
 import DeleteConfirmModal from './DeleteConfirmModal';
 import TableRow from './TableRow';
 
-const Billing = () => {
+const Billing = ({ setTotal }) => {
     const [receivedBills, setReceivedBills] = useState([]);
     const [isBillChanged, setIsBillChanged] = useState(false);
     const [deleteBill, setDeleteBill] = useState(null);
     const [deleteUrl, setDeleteUrl] = useState('');
+    const [openAddBillModal, setOpenAddBillModal] = useState(false);
     useEffect(() => {
-        // const url = `http://localhost:5000/bill`;
-        const url = `https://agile-castle-63096.herokuapp.com/bill`;
+        const url = `http://localhost:5000/bill`;
+        // const url = `https://agile-castle-63096.herokuapp.com/bill`;
         fetch(url)
             .then(res => res.json())
-            .then(data => setReceivedBills(data))
-    }, [isBillChanged]);
+            .then(data => {
+                setReceivedBills(data.result);
+                setTotal(data.sum);
+            })
+    }, [isBillChanged, setTotal]);
 
     const bills = [];
     for (let i = 0, j = receivedBills.length - 1; i < receivedBills.length; i++, j--) {
@@ -49,7 +53,7 @@ const Billing = () => {
                         <input type="text" placeholder="Search" className="input input-bordered input-info w-full max-w-xs input-sm" />
                     </div>
                     <div>
-                        <label htmlFor="addBill" className="btn btn-outline btn-info btn-sm modal-button">Add New Bill</label>
+                        <label onClick={() => setOpenAddBillModal(true)} htmlFor="addBill" className="btn btn-outline btn-info btn-sm modal-button">Add New Bill</label>
                     </div>
                 </div>
             </div>
@@ -78,11 +82,15 @@ const Billing = () => {
                     </tbody>
                 </table>
             </div>
-            <AddBillModal
-                isBillChanged={isBillChanged}
-                setIsBillChanged={setIsBillChanged}
-                setDeleteBill={setDeleteBill}
-            ></AddBillModal>
+            {
+                openAddBillModal && <AddBillModal
+                    isBillChanged={isBillChanged}
+                    setIsBillChanged={setIsBillChanged}
+                    setDeleteBill={setDeleteBill}
+                    setOpenAddBillModal={setOpenAddBillModal}
+                ></AddBillModal>
+            }
+
             {
                 deleteBill && <DeleteConfirmModal
                     confirmDeleteBill={confirmDeleteBill}
