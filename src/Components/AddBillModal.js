@@ -18,9 +18,9 @@ const AddBillModal = () => {
         }
         const { name, phone, email, amount } = data;
         const bill = { name, phone, email, amount, billId };
-        console.log(bill)
 
-        const url = `http://localhost:5000/bill`;
+        // const url = `http://localhost:5000/bill`;
+        const url = `https://agile-castle-63096.herokuapp.com/bill`;
         fetch(url, {
             method: 'POST',
             headers: {

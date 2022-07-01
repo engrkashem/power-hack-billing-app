@@ -11,7 +11,8 @@ const Login = ({ setAuth }) => {
     const onSubmit = user => {
         const email = user.email;
         const password = user.password;
-        const url = `http://localhost:5000/user/${email}`;
+        // const url = `http://localhost:5000/user/${email}`;
+        const url = `https://agile-castle-63096.herokuapp.com/user/${email}`;
         if (email) {
             fetch(url)
                 .then(res => res.json())
