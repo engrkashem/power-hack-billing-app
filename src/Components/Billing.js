@@ -1,8 +1,45 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import AddBillModal from './AddBillModal';
+import DeleteConfirmModal from './DeleteConfirmModal';
 import TableRow from './TableRow';
 
 const Billing = () => {
+    const [receivedBills, setReceivedBills] = useState([]);
+    const [isBillChanged, setIsBillChanged] = useState(false);
+    const [deleteBill, setDeleteBill] = useState(null);
+    const [deleteUrl, setDeleteUrl] = useState('');
+    useEffect(() => {
+        const url = `http://localhost:5000/bill`;
+        fetch(url)
+            .then(res => res.json())
+            .then(data => setReceivedBills(data))
+    }, [isBillChanged]);
+
+    const bills = [];
+    for (let i = 0, j = receivedBills.length - 1; i < receivedBills.length; i++, j--) {
+        bills[j] = receivedBills[i];
+    }
+
+    const confirmDeleteBill = () => {
+        console.log(deleteUrl)
+
+        fetch(deleteUrl, {
+            method: 'DELETE',
+            headers: {
+                'content-type': 'application/json',
+                'authorization': `Bearer ${localStorage.getItem('secretToken')}`
+            }
+        }).then(res => res.json()).then(data => {
+            if (data.deletedCount) {
+                setDeleteBill(null);
+                setIsBillChanged(!isBillChanged);
+                toast('You bill deleted successfilly');
+            }
+        })
+
+    }
+
     return (
         <div>
             <div className='max-w-6xl border border-info mt-10 p-2 mx-auto'>
@@ -20,7 +57,6 @@ const Billing = () => {
                 <table className="table w-full">
                     <thead>
                         <tr>
-                            <th></th>
                             <th>Billing Id</th>
                             <th>Full Name</th>
                             <th>Email</th>
@@ -30,11 +66,28 @@ const Billing = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <TableRow></TableRow>
+                        {
+                            bills.map(bill => <TableRow
+                                key={bill._id}
+                                bill={bill}
+                                setDeleteUrl={setDeleteUrl}
+                                setDeleteBill={setDeleteBill}
+                            ></TableRow>)
+                        }
+
                     </tbody>
                 </table>
             </div>
-            <AddBillModal></AddBillModal>
+            <AddBillModal
+                isBillChanged={isBillChanged}
+                setIsBillChanged={setIsBillChanged}
+                setDeleteBill={setDeleteBill}
+            ></AddBillModal>
+            {
+                deleteBill && <DeleteConfirmModal
+                    confirmDeleteBill={confirmDeleteBill}
+                ></DeleteConfirmModal>
+            }
         </div>
     );
 };

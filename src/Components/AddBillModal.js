@@ -2,7 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
-const AddBillModal = () => {
+const AddBillModal = ({ setIsBillChanged, isBillChanged }) => {
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
 
     const generateBillId = () => {
@@ -30,6 +30,7 @@ const AddBillModal = () => {
             body: JSON.stringify(bill)
         }).then(res => res.json()).then(data => {
             if (data.insertedId) {
+                setIsBillChanged(!isBillChanged)
                 toast.success('Your Bill has been received.Thank you.');
                 reset();
             }
